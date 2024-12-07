@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Mainpagestyle.css">
+    <title>Number System Converter</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Number System Converter</h1>
+        <nav>
+            <a href="FINAL TASK.HTML">Home Page</a>
+            <a href="Introduction.html">Introduction to Number System</a>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <div class="container">
+            <form>
+                <label for="inputValue">Enter a Number:</label>
+                <input type="text" id="inputValue" placeholder="Enter number...">
+                
+                <label for="inputBase">From Base:</label>
+                <select id="inputBase">
+                    <option value="2">Binary</option>
+                    <option value="10" selected>Decimal</option>
+                    <option value="8">Octal</option>
+                    <option value="16">Hexadecimal</option>
+                </select>
+            </form>
+            <div class="results" id="results">
+                <div class="result-item">Binary <span id="binaryResult">-</span></div>
+                <div class="result-item">Decimal <span id="decimalResult">-</span></div>
+                <div class="result-item">Octal <span id="octalResult">-</span></div>
+                <div class="result-item">Hexadecimal <span id="hexResult">-</span></div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Jamison 2024</p>
+    </footer>
+
+    <script>
+
+        const inputValue = document.getElementById('inputValue');
+        const inputBase = document.getElementById('inputBase');
+        const binaryResult = document.getElementById('binaryResult');
+        const decimalResult = document.getElementById('decimalResult');
+        const octalResult = document.getElementById('octalResult');
+        const hexResult = document.getElementById('hexResult');
+
+        function convertAll() {
+            const value = inputValue.value.trim();
+            const fromBase = parseInt(inputBase.value, 10);
+
+            try {
+                if (!value) {
+                    binaryResult.textContent = "-";
+                    decimalResult.textContent = "-";
+                    octalResult.textContent = "-";
+                    hexResult.textContent = "-";
+                    return;
+                }
+
+                const decimalValue = parseInt(value, fromBase);
+                if (isNaN(decimalValue)) throw new Error("Invalid input for the selected base.");
+
+                binaryResult.textContent = decimalValue.toString(2);
+                decimalResult.textContent = decimalValue;
+                octalResult.textContent = decimalValue.toString(8);
+                hexResult.textContent = decimalValue.toString(16).toUpperCase();
+            } catch {
+                binaryResult.textContent = "Error";
+                decimalResult.textContent = "Error";
+                octalResult.textContent = "Error";
+                hexResult.textContent = "Error";
+            }
+        }
+
+        inputValue.addEventListener('input', convertAll);
+        inputBase.addEventListener('change', convertAll);
+    </script>
+</body>
+</html>
